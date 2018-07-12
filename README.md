@@ -1,7 +1,11 @@
 
+This repo
+
 1. Write random prettier config files for data augmentation
 
 		node ./writeconfigs.js
+
+    If you don't want data augmentation, just remove all prettierrc files except one.
 2. Find matching open source repositories using GitHub API (output is included in repo)
 
 		yarn install
@@ -16,3 +20,24 @@
 5. Clean the input data file (allcode.txt) to remove all non-ascii chars for a smaller output layer size 
 		
 		./clean.sh
+6. Get char-rnn-tensorflow https://github.com/phiresky/char-rnn-tensorflow and train the net.
+
+    My fork contains the "sample-stdin.py" script which allows sampling of strings via json IPC over stdin/stdout
+
+    I trained it with this configuration:
+
+    * 3 LSTM layers
+    * 256 cells per layer (or try keeping it at 128)
+    * 500 chars unrolled sequence length (or try 200)
+    * batch size of 300
+    * learning rate of 0.002 decaying at 0.99 per epoch
+
+
+         python train.py --data_dir=./data/typescript-augmented --num_layers 3 --rnn_size 256 --num_epochs 100 --seq_length 500 --batch_size 300 --save_every 100 --decay_rate 0.99 --learning_rate 0.002 --save_dir save-aug-seq1000
+
+    This will take a few hours on a GTX 980 Ti.
+
+7. Open the [vscode-deep-complete](vscode-deep-complete/) directory in VS Code. Then run the extension from the debug panel.
+
+
+
