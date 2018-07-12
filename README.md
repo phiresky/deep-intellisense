@@ -3,7 +3,7 @@ An experimental implementation of IntelliSense for code using a trained recurren
 
 Should work on all kinds of code, but it needs at least ~50MB of code in the target language (more depending on syntax complexity) to be able to learn the syntax.
 
-So far I've only tried it with TypesScript + React code. This is a pretty hard combination due to at least three different contexts with completely different rules (normal JS, TS Types, and JSX).
+So far I've only tried it with [TypeScript](http://typescriptlang.org) + React code. This is a pretty hard combination due to at least three different mixed syntax contexts with completely different rules (normal JS, TS Types, and ["HTML"](https://reactjs.org/docs/introducing-jsx.html)).
 
 As is, this isn't good enough to be useful, but it shows that this kind of thing allows completions that would be hard to get otherwise. For example
 
@@ -17,6 +17,37 @@ import * as React from "react";
 // because almost all lines starting with `import * as React` end with `from "react";`
 
 ```
+
+
+## Future Work
+
+
+### Snippets
+
+Since the net outputs its prediction confidence, it should be possible to automatically create snippets with gaps like
+
+```ts
+class ????? extends ????? {
+    constructor(????) {
+	????
+    }
+```
+
+by replacing char sequences with low probabilities with gaps.
+
+### Predictions for Repetitive Code
+
+Often you have code that repeats very similar actions for different variables. For example Vectors:
+
+```ts
+
+    var xDist = mapCoordinate(x2) - mapCoordinate(x1);
+    var yDist = mapCoordinate(y2) - mapCoordinate(y1);
+    var zDist = mapCoordinate(z2) - mapCoordinate(z1);
+```
+
+It should be possible to fine tune the model for your own code basis. Then it might be possible for the net to predict the next two lines (`y` and `z`) after you have typed the first one for `x`.
+
 
 ## Setup
 
