@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "ts-node": "^7.0.0",
+    "typed-github-api": "^1.2.6"
+  }
+}
