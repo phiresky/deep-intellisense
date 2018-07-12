@@ -1,6 +1,13 @@
 
 An experimental implementation of IntelliSense for code using a trained recurrent neural network.
 
+Sample 1 (short completions):
+
+[![sample.jpg](sample.jpg)](sample.mp4)
+
+
+[Sample 2: full file](sample-fullyauto.mp4)
+
 Should work on all kinds of code, but it needs at least ~50MB of code in the target language (more depending on syntax complexity) to be able to learn the syntax.
 
 So far I've only tried it with [TypeScript](http://typescriptlang.org) + React code. This is a pretty hard combination due to at least three different mixed syntax contexts with completely different rules (normal JS, TS Types, and ["HTML"](https://reactjs.org/docs/introducing-jsx.html)).
