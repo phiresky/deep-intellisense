@@ -20,19 +20,25 @@ import * as React from "react";
 
 ## Setup
 
-1. Write random prettier config files for data augmentation
-
-		node ./writeconfigs.js
-
-    If you don't want data augmentation, just remove all prettierrc files except one.
-2. Find matching open source repositories using GitHub API (output is included in repo)
+1. Find matching open source repositories using GitHub API (output is included in repo)
 
 		yarn install
 		yarn run ts-node find.ts > repos.txt
-3. Clone GitHub repos
+	
+    I get publicly available code samples as training data from GitHub using tag search.
+2. Clone GitHub repos
 
 		mkdir repos && cd repos
 		../clone.sh ../repos.txt
+3. Write random prettier config files for data augmentation
+
+		node ./writeconfigs.js
+
+    I format all the code so stuff like indentation and quotes ('' vs "") are consistent.
+
+    But to increase the training data, I use multiple different formatter configurations so the net learns to generalize over formatting.
+
+    I haven't analyzed if this is better than keeping all files as they were.
 4. Create input data file by merging all matching files from the cloned repos, formatted with each of the prettier configs
 		
 		./concat.sh
